@@ -3,7 +3,7 @@ package com.marvel.selphius.asteroids_cleanarchitecture.datasource.remote;
 import android.arch.lifecycle.LiveData;
 
 import com.marvel.selphius.asteroids_cleanarchitecture.datasource.remote.model.Asteroid;
-import com.marvel.selphius.asteroids_cleanarchitecture.di.ApiResponse;
+import com.marvel.selphius.asteroids_cleanarchitecture.datasource.remote.api.ApiResponse;
 
 import java.util.List;
 

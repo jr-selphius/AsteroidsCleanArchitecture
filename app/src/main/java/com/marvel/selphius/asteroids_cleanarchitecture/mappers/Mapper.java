@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.marvel.selphius.asteroids_cleanarchitecture.datasource;
+package com.marvel.selphius.asteroids_cleanarchitecture.mappers;
 
 
 import java.util.ArrayList;

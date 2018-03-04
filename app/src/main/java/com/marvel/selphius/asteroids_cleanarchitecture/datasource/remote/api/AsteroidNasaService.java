@@ -1,9 +1,8 @@
-package com.marvel.selphius.asteroids_cleanarchitecture.datasource.remote;
+package com.marvel.selphius.asteroids_cleanarchitecture.datasource.remote.api;
 
 import android.arch.lifecycle.LiveData;
 
 import com.marvel.selphius.asteroids_cleanarchitecture.datasource.remote.model.Asteroid;
-import com.marvel.selphius.asteroids_cleanarchitecture.di.ApiResponse;
 
 import java.util.List;
 

@@ -14,10 +14,12 @@
  * limitations under the License.
  */
 
-package com.marvel.selphius.asteroids_cleanarchitecture.di;
+package com.marvel.selphius.asteroids_cleanarchitecture.util;
 
 
 import android.arch.lifecycle.LiveData;
+
+import com.marvel.selphius.asteroids_cleanarchitecture.datasource.remote.api.ApiResponse;
 
 import java.lang.reflect.Type;
 import java.util.concurrent.atomic.AtomicBoolean;

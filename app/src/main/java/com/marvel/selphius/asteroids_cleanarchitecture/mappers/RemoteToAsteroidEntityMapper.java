@@ -1,6 +1,5 @@
 package com.marvel.selphius.asteroids_cleanarchitecture.mappers;
 
-import com.marvel.selphius.asteroids_cleanarchitecture.datasource.Mapper;
 import com.marvel.selphius.asteroids_cleanarchitecture.datasource.remote.model.Asteroid;
 import com.marvel.selphius.asteroids_cleanarchitecture.model.AsteroidEntity;
 

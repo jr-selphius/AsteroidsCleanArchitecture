@@ -7,7 +7,7 @@ import android.arch.lifecycle.Transformations;
 import com.marvel.selphius.asteroids_cleanarchitecture.datasource.local.LocalDataSource;
 import com.marvel.selphius.asteroids_cleanarchitecture.datasource.remote.RemoteDataSource;
 import com.marvel.selphius.asteroids_cleanarchitecture.datasource.remote.model.Asteroid;
-import com.marvel.selphius.asteroids_cleanarchitecture.di.ApiResponse;
+import com.marvel.selphius.asteroids_cleanarchitecture.datasource.remote.api.ApiResponse;
 import com.marvel.selphius.asteroids_cleanarchitecture.mappers.RemoteToAsteroidEntityMapper;
 import com.marvel.selphius.asteroids_cleanarchitecture.model.AsteroidEntity;
 

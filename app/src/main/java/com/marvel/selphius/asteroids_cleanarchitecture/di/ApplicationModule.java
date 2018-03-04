@@ -11,11 +11,12 @@ import com.marvel.selphius.asteroids_cleanarchitecture.datasource.AsteroidsRepos
 import com.marvel.selphius.asteroids_cleanarchitecture.datasource.local.AppDatabase;
 import com.marvel.selphius.asteroids_cleanarchitecture.datasource.local.AsteroidDao;
 import com.marvel.selphius.asteroids_cleanarchitecture.datasource.local.LocalDataSourceImpl;
-import com.marvel.selphius.asteroids_cleanarchitecture.datasource.remote.AsteroidDeserializer;
-import com.marvel.selphius.asteroids_cleanarchitecture.datasource.remote.AsteroidNasaService;
+import com.marvel.selphius.asteroids_cleanarchitecture.datasource.remote.api.AsteroidDeserializer;
+import com.marvel.selphius.asteroids_cleanarchitecture.datasource.remote.api.AsteroidNasaService;
 import com.marvel.selphius.asteroids_cleanarchitecture.datasource.remote.RemoteDataSourceImpl;
 import com.marvel.selphius.asteroids_cleanarchitecture.datasource.remote.model.Asteroid;
 import com.marvel.selphius.asteroids_cleanarchitecture.list.domain.GetTodayAsteroidsUseCase;
+import com.marvel.selphius.asteroids_cleanarchitecture.util.LiveDataCallAdapterFactory;
 
 import java.lang.reflect.Type;
 import java.util.List;

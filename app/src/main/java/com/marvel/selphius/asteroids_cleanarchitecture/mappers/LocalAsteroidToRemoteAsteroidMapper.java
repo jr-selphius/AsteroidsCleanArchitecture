@@ -1,6 +1,5 @@
 package com.marvel.selphius.asteroids_cleanarchitecture.mappers;
 
-import com.marvel.selphius.asteroids_cleanarchitecture.datasource.Mapper;
 import com.marvel.selphius.asteroids_cleanarchitecture.datasource.local.model.Asteroid;
 
 public class LocalAsteroidToRemoteAsteroidMapper extends Mapper<Asteroid, com.marvel.selphius.asteroids_cleanarchitecture.datasource.remote.model.Asteroid> {

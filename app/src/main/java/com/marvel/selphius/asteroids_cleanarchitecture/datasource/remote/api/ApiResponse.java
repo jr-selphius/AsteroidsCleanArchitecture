@@ -1,4 +1,4 @@
-package com.marvel.selphius.asteroids_cleanarchitecture.di;
+package com.marvel.selphius.asteroids_cleanarchitecture.datasource.remote.api;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;

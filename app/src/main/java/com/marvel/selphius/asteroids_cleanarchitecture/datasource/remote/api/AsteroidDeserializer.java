@@ -1,4 +1,4 @@
-package com.marvel.selphius.asteroids_cleanarchitecture.datasource.remote;
+package com.marvel.selphius.asteroids_cleanarchitecture.datasource.remote.api;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonDeserializationContext;
