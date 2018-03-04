@@ -1,0 +1,85 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 27
+    defaultConfig {
+        applicationId "com.marvel.selphius.asteroids_cleanarchitecture"
+        minSdkVersion 19
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+ext.versions = [
+        "support_lib"               : "27.0.2"          ,
+        "constraint_layout"         : "1.0.2"           ,
+        "junit"                     : "4.12"            ,
+        "spresso_core"              : "3.0.1"           ,
+        "test_runner"               : "1.0.1"           ,
+        "dagger"                    : "2.11"            ,
+        "retrofit"                  : "2.3.0"           ,
+        "gson"                      : "2.8.0"           ,
+        "retrofit_converter_gson"   : "2.3.0"           ,
+        "butterknife"               : "8.8.1"           ,
+        "timber"                    : "4.6.1"           ,
+        "lifecycle"                 : "1.1.0"           ,
+        "room"                      : "1.0.0"           ,
+        "paging"                    : "1.0.0-alpha5"    ,
+]
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "com.android.support:appcompat-v7:${versions.support_lib}"
+    implementation "com.android.support.constraint:constraint-layout:${versions.constraint_layout}"
+    implementation "com.android.support:design:${versions.support_lib}"
+    testImplementation "junit:junit:${versions.junit}"
+    androidTestImplementation "com.android.support.test:runner:${versions.test_runner}"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:${versions.spresso_core}"
+
+    //dagger2
+    compile "com.google.dagger:dagger:${versions.dagger}"
+    annotationProcessor "com.google.dagger:dagger-compiler:${versions.dagger}"
+    compile "com.google.dagger:dagger-android:${versions.dagger}"
+    compile "com.google.dagger:dagger-android-support:${versions.dagger}" // if you use the support libraries
+    annotationProcessor "com.google.dagger:dagger-android-processor:${versions.dagger}"
+
+    //retrofit2
+    compile "com.squareup.retrofit2:retrofit:${versions.retrofit}"
+
+    //gson
+    compile "com.google.code.gson:gson:${versions.gson}"
+    compile "com.squareup.retrofit2:converter-gson:${versions.retrofit_converter_gson}"
+
+    //butterknife
+    compile "com.jakewharton:butterknife:${versions.butterknife}"
+    annotationProcessor "com.jakewharton:butterknife-compiler:${versions.butterknife}"
+
+    //timber
+    implementation "com.jakewharton.timber:timber:${versions.timber}"
+
+    //viewModel and liveData
+    implementation "android.arch.lifecycle:extensions:${versions.lifecycle}"
+    annotationProcessor "android.arch.lifecycle:compiler:${versions.lifecycle}"
+
+    //room
+    implementation "android.arch.persistence.room:runtime:${versions.room}"
+    annotationProcessor "android.arch.persistence.room:compiler:${versions.room}"
+
+    //paging
+    implementation "android.arch.paging:runtime:${versions.paging}"
+
+    //test helpers for LiveData
+    testImplementation "android.arch.core:core-testing:${versions.lifecycle}"
+
+    //test helpers for Room
+    testImplementation "android.arch.persistence.room:testing:${versions.room}"
+
+}
