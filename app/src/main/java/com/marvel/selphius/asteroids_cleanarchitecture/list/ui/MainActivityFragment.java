@@ -60,8 +60,10 @@ public class MainActivityFragment extends Fragment {
         mainViewModel.getAsteroids().observe(this, new Observer<List<Asteroide>>() {
             @Override
             public void onChanged(@Nullable List<Asteroide> asteroids) {
-                asteroidsAdapter.replaceAsteroids(asteroids);
-                asteroidsAdapter.notifyDataSetChanged();
+                if (asteroids != null) {
+                    asteroidsAdapter.replaceAsteroids(asteroids);
+                    asteroidsAdapter.notifyDataSetChanged();
+                }
             }
         });
     }

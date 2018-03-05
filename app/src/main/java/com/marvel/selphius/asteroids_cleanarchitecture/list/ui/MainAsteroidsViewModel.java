@@ -12,6 +12,7 @@ import com.marvel.selphius.asteroids_cleanarchitecture.model.AsteroidEntity;
 import com.marvel.selphius.asteroids_cleanarchitecture.list.domain.GetTodayAsteroidsUseCase;
 import com.marvel.selphius.asteroids_cleanarchitecture.list.model.Asteroide;
 import com.marvel.selphius.asteroids_cleanarchitecture.mappers.EntityToAsteroideMapper;
+import com.marvel.selphius.asteroids_cleanarchitecture.util.Resource;
 
 import java.util.List;
 
@@ -35,13 +36,17 @@ public class MainAsteroidsViewModel extends AndroidViewModel {
     }
 
     public void loadAsteroids() {
-        asteroids = Transformations.map(getTodayAsteroidsUseCase.execute(), new Function<List<AsteroidEntity>, List<Asteroide>>() {
+        asteroids = Transformations.map(getTodayAsteroidsUseCase.execute(), new Function<Resource<List<AsteroidEntity>>, List<Asteroide>>() {
             @Override
-            public List<Asteroide> apply(List<AsteroidEntity> input) {
+            public List<Asteroide> apply(Resource<List<AsteroidEntity>> input) {
                 EntityToAsteroideMapper entityToAsteroideMapper = new EntityToAsteroideMapper();
-                return entityToAsteroideMapper.map(input);
+                List<AsteroidEntity> data = input.data;
+                if (data != null) {
+                    return entityToAsteroideMapper.map(data);
+                }
+
+                return null;
             }
         });
     }
-
 }

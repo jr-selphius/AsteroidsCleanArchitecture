@@ -11,6 +11,7 @@ public class Asteroid {
     @PrimaryKey(autoGenerate = true)
     private int uid;
 
+    @ColumnInfo(name = "date")
     private String date;
 
     @Embedded

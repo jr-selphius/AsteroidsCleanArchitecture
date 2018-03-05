@@ -4,6 +4,7 @@ import android.arch.lifecycle.LiveData;
 
 import com.marvel.selphius.asteroids_cleanarchitecture.datasource.AsteroidsRepository;
 import com.marvel.selphius.asteroids_cleanarchitecture.model.AsteroidEntity;
+import com.marvel.selphius.asteroids_cleanarchitecture.util.Resource;
 
 import java.util.List;
 
@@ -15,7 +16,7 @@ public class GetTodayAsteroidsUseCase {
         this.repository = repository;
     }
 
-    public LiveData<List<AsteroidEntity>> execute() {
+    public LiveData<Resource<List<AsteroidEntity>>> execute() {
         return repository.getTodayAsteroids();
     }
 }
