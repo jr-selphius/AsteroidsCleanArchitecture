@@ -12,12 +12,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
+import com.marvel.selphius.asteroids_cleanarchitecture.CustomApplication;
 import com.marvel.selphius.asteroids_cleanarchitecture.R;
 import com.marvel.selphius.asteroids_cleanarchitecture.list.model.Asteroide;
 
 import java.util.Collections;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,6 +32,15 @@ public class MainActivityFragment extends Fragment {
 
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
+
+    @BindView(R.id.main_progress_recycler_view)
+    ProgressBar progress;
+
+    @BindView(R.id.central_message)
+    TextView centralMessage;
+
+    @Inject
+    TodayAsteroidsViewModelFactory mainViewModelFactory;
 
     private Unbinder unbinder;
 
@@ -43,7 +57,7 @@ public class MainActivityFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_main, container, false);
         unbinder = ButterKnife.bind(this, view);
-
+        ((CustomApplication) getActivity().getApplication()).getComponent().inject(this);
         return view;
     }
 
@@ -51,7 +65,7 @@ public class MainActivityFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mainViewModel = ViewModelProviders.of(this).get(MainAsteroidsViewModel.class);
+        mainViewModel = ViewModelProviders.of(this, mainViewModelFactory).get(MainAsteroidsViewModel.class);
 
         setUpRecyclerView();
 
@@ -64,6 +78,21 @@ public class MainActivityFragment extends Fragment {
                     asteroidsAdapter.replaceAsteroids(asteroids);
                     asteroidsAdapter.notifyDataSetChanged();
                 }
+            }
+        });
+
+        mainViewModel.mustShowProgress().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(@Nullable Boolean isVisible) {
+                progress.setVisibility(isVisible ? View.VISIBLE : View.INVISIBLE);
+            }
+        });
+
+        mainViewModel.getCentralMessage().observe(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(@Nullable Integer integer) {
+                centralMessage.setText(integer);
+                centralMessage.setVisibility(View.VISIBLE);
             }
         });
     }

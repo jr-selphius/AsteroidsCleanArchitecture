@@ -7,6 +7,7 @@ import android.content.Context;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import com.marvel.selphius.asteroids_cleanarchitecture.list.ui.TodayAsteroidsViewModelFactory;
 import com.marvel.selphius.asteroids_cleanarchitecture.datasource.AsteroidsRepository;
 import com.marvel.selphius.asteroids_cleanarchitecture.datasource.local.AppDatabase;
 import com.marvel.selphius.asteroids_cleanarchitecture.datasource.local.AsteroidDao;
@@ -99,6 +100,11 @@ public class ApplicationModule {
     @Provides
     public GetTodayAsteroidsUseCase provideGetTodayAsteroidsUseCase(AsteroidsRepository repository) {
         return new GetTodayAsteroidsUseCase(repository);
+    }
+
+    @Provides
+    public TodayAsteroidsViewModelFactory provideViewModelFactory(GetTodayAsteroidsUseCase getTodayAsteroidsUseCase) {
+        return new TodayAsteroidsViewModelFactory(getTodayAsteroidsUseCase);
     }
 
 }
