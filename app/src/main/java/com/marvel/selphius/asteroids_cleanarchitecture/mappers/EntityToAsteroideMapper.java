@@ -9,6 +9,7 @@ public class EntityToAsteroideMapper extends Mapper<AsteroidEntity, Asteroide> {
     public Asteroide map(AsteroidEntity value) {
 
         Asteroide asteroide = new Asteroide();
+        asteroide.setId(value.getUid());
         asteroide.setName(value.getName());
         asteroide.setNasaJplUrl(value.getNasaJplUrl());
         asteroide.setDate(value.getDate());

@@ -9,6 +9,7 @@ public class LocalToAsteroidEntityMapper extends Mapper<Asteroid, AsteroidEntity
     public AsteroidEntity map(Asteroid value) {
 
         AsteroidEntity asteroid = new AsteroidEntity();
+        asteroid.setUid(value.getUid());
         asteroid.setAbstoluteMagnitudeH(asteroid.getAbstoluteMagnitudeH());
         asteroid.setDate(value.getDate());
 

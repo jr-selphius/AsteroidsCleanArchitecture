@@ -2,6 +2,8 @@ package com.marvel.selphius.asteroids_cleanarchitecture.list.model;
 
 public class Asteroide {
 
+    private int id;
+
     private String date;
 
     private String neoReferenceId;
@@ -60,5 +62,13 @@ public class Asteroide {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

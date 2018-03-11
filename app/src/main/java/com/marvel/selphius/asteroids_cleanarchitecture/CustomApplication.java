@@ -1,12 +1,12 @@
 package com.marvel.selphius.asteroids_cleanarchitecture;
 
-import android.app.Application;
+import android.support.multidex.MultiDexApplication;
 
 import com.marvel.selphius.asteroids_cleanarchitecture.di.ApplicationComponent;
 import com.marvel.selphius.asteroids_cleanarchitecture.di.ApplicationModule;
 import com.marvel.selphius.asteroids_cleanarchitecture.di.DaggerApplicationComponent;
 
-public class CustomApplication extends Application {
+public class CustomApplication extends MultiDexApplication {
 
     private ApplicationComponent component;
 

@@ -28,6 +28,24 @@ public class MainAsteroidsViewModel extends ViewModel {
 
     public MainAsteroidsViewModel(GetTodayAsteroidsUseCase getTodayAsteroidsUseCase) {
         this.getTodayAsteroidsUseCase = getTodayAsteroidsUseCase;
+
+        asteroids = Transformations.map(getTodayAsteroidsUseCase.execute(), new Function<Resource<List<AsteroidEntity>>, List<Asteroide>>() {
+            @Override
+            public List<Asteroide> apply(Resource<List<AsteroidEntity>> input) {
+                List<AsteroidEntity> data = input.data;
+                if (data != null) {
+
+                    mustShowProgress.setValue(false);
+
+                    if (data.size() == 0) {
+                        centralMessage.setValue(R.string.no_asteroids_today);
+                    }
+
+                    return new EntityToAsteroideMapper().map(data);
+                }
+                return null;
+            }
+        });
     }
 
     public LiveData<List<Asteroide>> getAsteroids() {
@@ -42,8 +60,9 @@ public class MainAsteroidsViewModel extends ViewModel {
         return centralMessage;
     }
 
-    public void loadAsteroids() {
+    /*public void loadAsteroids() {
 
+        //centralMessage.setValue(R.string.no_asteroids_today);
         mustShowProgress.setValue(true);
 
         asteroids = Transformations.map(getTodayAsteroidsUseCase.execute(), new Function<Resource<List<AsteroidEntity>>, List<Asteroide>>() {
@@ -64,5 +83,5 @@ public class MainAsteroidsViewModel extends ViewModel {
                 return null;
             }
         });
-    }
+    }*/
 }

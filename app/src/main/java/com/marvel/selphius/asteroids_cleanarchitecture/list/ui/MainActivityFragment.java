@@ -19,7 +19,7 @@ import com.marvel.selphius.asteroids_cleanarchitecture.CustomApplication;
 import com.marvel.selphius.asteroids_cleanarchitecture.R;
 import com.marvel.selphius.asteroids_cleanarchitecture.list.model.Asteroide;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -69,14 +69,11 @@ public class MainActivityFragment extends Fragment {
 
         setUpRecyclerView();
 
-        mainViewModel.loadAsteroids();
-
         mainViewModel.getAsteroids().observe(this, new Observer<List<Asteroide>>() {
             @Override
             public void onChanged(@Nullable List<Asteroide> asteroids) {
                 if (asteroids != null) {
                     asteroidsAdapter.replaceAsteroids(asteroids);
-                    asteroidsAdapter.notifyDataSetChanged();
                 }
             }
         });
@@ -103,7 +100,7 @@ public class MainActivityFragment extends Fragment {
         DividerItemDecoration decoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
         recyclerView.addItemDecoration(decoration);
 
-        asteroidsAdapter = new AsteroidsAdapter(Collections.EMPTY_LIST);
+        asteroidsAdapter = new AsteroidsAdapter(new ArrayList<>());
         recyclerView.setAdapter(asteroidsAdapter);
     }
 
