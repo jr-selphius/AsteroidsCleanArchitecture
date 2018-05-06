@@ -1,5 +1,6 @@
 package com.marvel.selphius.asteroids_cleanarchitecture.list.ui;
 
+import android.support.annotation.NonNull;
 import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -20,20 +21,20 @@ public class AsteroidsAdapter extends RecyclerView.Adapter<AsteroidViewHolder> {
     }
 
     public void replaceAsteroids(List<Asteroide> newAsteroids) {
-        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new MyDiffUtil(asteroids, newAsteroids));
+        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new AsteroidsDiffUtil(asteroids, newAsteroids));
         asteroids.clear();
         asteroids.addAll(newAsteroids);
         diffResult.dispatchUpdatesTo(this);
     }
 
     @Override
-    public AsteroidViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public AsteroidViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View asteroidItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.asteroid_item, parent, false);
         return new AsteroidViewHolder(asteroidItem);
     }
 
     @Override
-    public void onBindViewHolder(AsteroidViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull AsteroidViewHolder holder, int position) {
         holder.bind(asteroids.get(position));
     }
 

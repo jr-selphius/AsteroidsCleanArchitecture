@@ -1,6 +1,5 @@
 package com.marvel.selphius.asteroids_cleanarchitecture.list.ui;
 
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -17,10 +16,8 @@ import android.widget.TextView;
 
 import com.marvel.selphius.asteroids_cleanarchitecture.CustomApplication;
 import com.marvel.selphius.asteroids_cleanarchitecture.R;
-import com.marvel.selphius.asteroids_cleanarchitecture.list.model.Asteroide;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -57,7 +54,7 @@ public class MainActivityFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_main, container, false);
         unbinder = ButterKnife.bind(this, view);
-        ((CustomApplication) getActivity().getApplication()).getComponent().inject(this);
+        ((CustomApplication) getActivity().getApplication()).createListComponent().inject(this);
         return view;
     }
 
@@ -69,28 +66,17 @@ public class MainActivityFragment extends Fragment {
 
         setUpRecyclerView();
 
-        mainViewModel.getAsteroids().observe(this, new Observer<List<Asteroide>>() {
-            @Override
-            public void onChanged(@Nullable List<Asteroide> asteroids) {
-                if (asteroids != null) {
-                    asteroidsAdapter.replaceAsteroids(asteroids);
-                }
+        mainViewModel.getAsteroids().observe(this, asteroids -> {
+            if (asteroids != null) {
+                asteroidsAdapter.replaceAsteroids(asteroids);
             }
         });
 
-        mainViewModel.mustShowProgress().observe(this, new Observer<Boolean>() {
-            @Override
-            public void onChanged(@Nullable Boolean isVisible) {
-                progress.setVisibility(isVisible ? View.VISIBLE : View.INVISIBLE);
-            }
-        });
+        mainViewModel.mustShowProgress().observe(this, isVisible -> progress.setVisibility(isVisible ? View.VISIBLE : View.INVISIBLE));
 
-        mainViewModel.getCentralMessage().observe(this, new Observer<Integer>() {
-            @Override
-            public void onChanged(@Nullable Integer integer) {
-                centralMessage.setText(integer);
-                centralMessage.setVisibility(View.VISIBLE);
-            }
+        mainViewModel.getCentralMessage().observe(this, integer -> {
+            centralMessage.setText(integer);
+            centralMessage.setVisibility(View.VISIBLE);
         });
     }
 
@@ -108,5 +94,6 @@ public class MainActivityFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+        ((CustomApplication) getActivity().getApplication()).releaseListComponent();
     }
 }

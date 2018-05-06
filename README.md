@@ -1,6 +1,8 @@
 # AsteroidsCleanArchitecture
 
-The aim of this little project is to practice and experiment a bit with clean architecture:
+The aim of this little project is to practice and experiment a bit with
+ clean architecture, the android architecture components and some of the
+  most common used libraries:
 
 # Libraries 
 

@@ -10,7 +10,7 @@ import java.util.List;
 
 public class GetTodayAsteroidsUseCase {
 
-    AsteroidsRepository repository;
+    private AsteroidsRepository repository;
 
     public GetTodayAsteroidsUseCase(AsteroidsRepository repository) {
         this.repository = repository;

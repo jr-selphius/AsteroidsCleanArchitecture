@@ -26,6 +26,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -56,12 +57,20 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    public AsteroidNasaService provideRetrofit(GsonConverterFactory gsonConverterFactory) {
+    public OkHttpClient provideOkHttpClient() {
+        OkHttpClient okHttpClient = new OkHttpClient();
+        return okHttpClient;
+    }
+
+    @Provides
+    @Singleton
+    public AsteroidNasaService provideRetrofit(GsonConverterFactory gsonConverterFactory, OkHttpClient okHttpClient) {
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.nasa.gov/neo/rest/v1/")
                 .addConverterFactory(gsonConverterFactory)
                 .addCallAdapterFactory(new LiveDataCallAdapterFactory())
+                .client(okHttpClient)
                 .build();
 
         return retrofit.create(AsteroidNasaService.class);
@@ -96,15 +105,4 @@ public class ApplicationModule {
     public AsteroidsRepository provideAsteroidsRepository(LocalDataSourceImpl localDataSource, RemoteDataSourceImpl remoteDataSource) {
         return new AsteroidsRepository(localDataSource, remoteDataSource);
     }
-
-    @Provides
-    public GetTodayAsteroidsUseCase provideGetTodayAsteroidsUseCase(AsteroidsRepository repository) {
-        return new GetTodayAsteroidsUseCase(repository);
-    }
-
-    @Provides
-    public TodayAsteroidsViewModelFactory provideViewModelFactory(GetTodayAsteroidsUseCase getTodayAsteroidsUseCase) {
-        return new TodayAsteroidsViewModelFactory(getTodayAsteroidsUseCase);
-    }
-
 }

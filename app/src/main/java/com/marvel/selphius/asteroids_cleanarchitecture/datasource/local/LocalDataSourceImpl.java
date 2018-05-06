@@ -15,8 +15,9 @@ public class LocalDataSourceImpl implements LocalDataSource {
     }
 
     @Override
-    public LiveData<List<Asteroid>> getTodayAsteroids() {
-        return asteroidDao.findByDate("2018-03-11");
+    public LiveData<List<Asteroid>> getAsteroidsByDate(String date) {
+
+        return asteroidDao.findByDate(date);
     }
 
     @Override

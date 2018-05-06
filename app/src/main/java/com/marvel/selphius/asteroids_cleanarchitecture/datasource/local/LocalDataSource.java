@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface LocalDataSource {
 
-    LiveData<List<Asteroid>> getTodayAsteroids();
+    LiveData<List<Asteroid>> getAsteroidsByDate(String date);
 
     void insertAsteroids(List<Asteroid> asteroids);
 }

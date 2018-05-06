@@ -8,10 +8,6 @@ import com.marvel.selphius.asteroids_cleanarchitecture.datasource.remote.api.Api
 
 import java.util.List;
 
-/**
- * Created by selphius on 2/3/18.
- */
-
 public class RemoteDataSourceImpl implements RemoteDataSource {
 
     private AsteroidNasaService service;

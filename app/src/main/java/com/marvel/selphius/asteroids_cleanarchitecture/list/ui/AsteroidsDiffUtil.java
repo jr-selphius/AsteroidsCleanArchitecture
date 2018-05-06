@@ -6,12 +6,12 @@ import com.marvel.selphius.asteroids_cleanarchitecture.list.model.Asteroide;
 
 import java.util.List;
 
-public class MyDiffUtil extends DiffUtil.Callback {
+public class AsteroidsDiffUtil extends DiffUtil.Callback {
 
-    List<Asteroide> oldAsteroids;
-    List<Asteroide> newAsteroids;
+    private List<Asteroide> oldAsteroids;
+    private List<Asteroide> newAsteroids;
 
-    public MyDiffUtil(List<Asteroide> oldAsteroids, List<Asteroide> newAsteroids) {
+    public AsteroidsDiffUtil(List<Asteroide> oldAsteroids, List<Asteroide> newAsteroids) {
         this.oldAsteroids = oldAsteroids;
         this.newAsteroids = newAsteroids;
     }

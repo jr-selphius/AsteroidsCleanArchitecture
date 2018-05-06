@@ -1,6 +1,5 @@
 package com.marvel.selphius.asteroids_cleanarchitecture.list.ui;
 
-import android.arch.core.util.Function;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.Transformations;
@@ -11,7 +10,6 @@ import com.marvel.selphius.asteroids_cleanarchitecture.list.domain.GetTodayAster
 import com.marvel.selphius.asteroids_cleanarchitecture.list.model.Asteroide;
 import com.marvel.selphius.asteroids_cleanarchitecture.mappers.EntityToAsteroideMapper;
 import com.marvel.selphius.asteroids_cleanarchitecture.model.AsteroidEntity;
-import com.marvel.selphius.asteroids_cleanarchitecture.util.Resource;
 import com.marvel.selphius.asteroids_cleanarchitecture.util.SingleLiveEvent;
 
 import java.util.List;
@@ -24,27 +22,21 @@ public class MainAsteroidsViewModel extends ViewModel {
 
     private SingleLiveEvent<Integer> centralMessage = new SingleLiveEvent<>();
 
-    GetTodayAsteroidsUseCase getTodayAsteroidsUseCase;
-
     public MainAsteroidsViewModel(GetTodayAsteroidsUseCase getTodayAsteroidsUseCase) {
-        this.getTodayAsteroidsUseCase = getTodayAsteroidsUseCase;
 
-        asteroids = Transformations.map(getTodayAsteroidsUseCase.execute(), new Function<Resource<List<AsteroidEntity>>, List<Asteroide>>() {
-            @Override
-            public List<Asteroide> apply(Resource<List<AsteroidEntity>> input) {
-                List<AsteroidEntity> data = input.data;
-                if (data != null) {
+        asteroids = Transformations.map(getTodayAsteroidsUseCase.execute(), input -> {
+            List<AsteroidEntity> data = input.data;
+            if (data != null) {
 
-                    mustShowProgress.setValue(false);
+                mustShowProgress.setValue(false);
 
-                    if (data.size() == 0) {
-                        centralMessage.setValue(R.string.no_asteroids_today);
-                    }
-
-                    return new EntityToAsteroideMapper().map(data);
+                if (data.size() == 0) {
+                    centralMessage.setValue(R.string.no_asteroids_today);
                 }
-                return null;
+
+                return new EntityToAsteroideMapper().map(data);
             }
+            return null;
         });
     }
 
@@ -59,29 +51,4 @@ public class MainAsteroidsViewModel extends ViewModel {
     public SingleLiveEvent<Integer> getCentralMessage() {
         return centralMessage;
     }
-
-    /*public void loadAsteroids() {
-
-        //centralMessage.setValue(R.string.no_asteroids_today);
-        mustShowProgress.setValue(true);
-
-        asteroids = Transformations.map(getTodayAsteroidsUseCase.execute(), new Function<Resource<List<AsteroidEntity>>, List<Asteroide>>() {
-            @Override
-            public List<Asteroide> apply(Resource<List<AsteroidEntity>> input) {
-                EntityToAsteroideMapper entityToAsteroideMapper = new EntityToAsteroideMapper();
-                List<AsteroidEntity> data = input.data;
-                if (data != null) {
-
-                    mustShowProgress.setValue(false);
-
-                    if (data.size() == 0) {
-                        centralMessage.setValue(R.string.no_asteroids_today);
-                    }
-
-                    return entityToAsteroideMapper.map(data);
-                }
-                return null;
-            }
-        });
-    }*/
 }

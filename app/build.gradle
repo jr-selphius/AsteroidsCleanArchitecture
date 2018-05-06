@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "com.marvel.selphius.asteroids_cleanarchitecture"
+        applicationId "com.marvel.selphius.asteroids"
         minSdkVersion 19
         targetSdkVersion 27
         versionCode 1
@@ -24,8 +24,8 @@ android {
 }
 
 ext.versions = [
-        "support_lib"               : "27.1.0"          ,
-        "constraint_layout"         : "1.0.2"           ,
+        "support_lib"               : "27.1.1"          ,
+        "constraint_layout"         : "1.1.0"           ,
         "junit"                     : "4.12"            ,
         "mockito"                   : "2.10.0"          ,
         "spresso_core"              : "3.0.1"           ,
@@ -36,9 +36,9 @@ ext.versions = [
         "retrofit_converter_gson"   : "2.3.0"           ,
         "butterknife"               : "8.8.1"           ,
         "timber"                    : "4.6.1"           ,
-        "lifecycle"                 : "1.1.0"           ,
+        "lifecycle"                 : "1.1.1"           ,
         "room"                      : "1.0.0"           ,
-        "paging"                    : "1.0.0-alpha6"    ,
+        "paging"                    : "1.0.0-rc1"    ,
         "multidex"                  : "1.0.3"           ,
 ]
 

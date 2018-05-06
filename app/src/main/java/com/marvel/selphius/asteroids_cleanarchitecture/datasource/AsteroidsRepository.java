@@ -1,6 +1,5 @@
 package com.marvel.selphius.asteroids_cleanarchitecture.datasource;
 
-import android.arch.core.util.Function;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Transformations;
 import android.support.annotation.NonNull;
@@ -12,19 +11,17 @@ import com.marvel.selphius.asteroids_cleanarchitecture.datasource.remote.api.Api
 import com.marvel.selphius.asteroids_cleanarchitecture.datasource.remote.model.Asteroid;
 import com.marvel.selphius.asteroids_cleanarchitecture.mappers.LocalAsteroidToRemoteAsteroidMapper;
 import com.marvel.selphius.asteroids_cleanarchitecture.mappers.LocalToAsteroidEntityMapper;
-import com.marvel.selphius.asteroids_cleanarchitecture.mappers.RemoteToAsteroidEntityMapper;
 import com.marvel.selphius.asteroids_cleanarchitecture.model.AsteroidEntity;
 import com.marvel.selphius.asteroids_cleanarchitecture.util.NetworkBoundResource;
 import com.marvel.selphius.asteroids_cleanarchitecture.util.Resource;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class AsteroidsRepository implements DataSource {
 
-    /**
-     * At this moment there is not coordination between differents
-     * datasources.
-     */
     private LocalDataSource localDataSource;
 
     private RemoteDataSource remoteDatasource;
@@ -53,13 +50,10 @@ public class AsteroidsRepository implements DataSource {
             @Override
             protected LiveData<List<AsteroidEntity>> loadFromDb() {
 
-                return Transformations.map(localDataSource.getTodayAsteroids(), new Function<List<com.marvel.selphius.asteroids_cleanarchitecture.datasource.local.model.Asteroid>, List<AsteroidEntity>>() {
-                    @Override
-                    public List<AsteroidEntity> apply(List<com.marvel.selphius.asteroids_cleanarchitecture.datasource.local.model.Asteroid> localAsteroids) {
+                return Transformations.map(localDataSource.getAsteroidsByDate(getDate()), localAsteroids -> {
 
-                        LocalToAsteroidEntityMapper mapper = new LocalToAsteroidEntityMapper();
-                        return mapper.map(localAsteroids);
-                    }
+                    LocalToAsteroidEntityMapper mapper = new LocalToAsteroidEntityMapper();
+                    return mapper.map(localAsteroids);
                 });
             }
 
@@ -69,15 +63,11 @@ public class AsteroidsRepository implements DataSource {
                 return remoteDatasource.getTodayAsteroids();
             }
         }.getAsLiveData();
+    }
 
-        /*return Transformations.map(remoteDatasource.getTodayAsteroids(), new Function<ApiResponse<List<Asteroid>>, List<AsteroidEntity>>() {
-            @Override
-            public List<AsteroidEntity> apply(ApiResponse<List<Asteroid>> input) {
-                List<Asteroid> remoteAsteroids = input.body;
-                RemoteToAsteroidEntityMapper remoteToAsteroidEntityMapper = new RemoteToAsteroidEntityMapper();
-                return remoteToAsteroidEntityMapper.map(remoteAsteroids);
-            }
-        });*/
-
+    private String getDate() {
+        Date date = Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        return df.format(date);
     }
 }
