@@ -20,6 +20,8 @@ public class MainAsteroidsViewModel extends ViewModel {
 
     private MutableLiveData<Boolean> mustShowProgress = new MutableLiveData<>();
 
+    private MutableLiveData<Boolean> mustShowCenterMessage = new MutableLiveData<>();
+
     private SingleLiveEvent<Integer> centralMessage = new SingleLiveEvent<>();
 
     public MainAsteroidsViewModel(GetTodayAsteroidsUseCase getTodayAsteroidsUseCase) {
@@ -32,6 +34,8 @@ public class MainAsteroidsViewModel extends ViewModel {
 
                 if (data.size() == 0) {
                     centralMessage.setValue(R.string.no_asteroids_today);
+                } else {
+                    mustShowCenterMessage.setValue(false);
                 }
 
                 return new EntityToAsteroideMapper().map(data);
@@ -46,6 +50,10 @@ public class MainAsteroidsViewModel extends ViewModel {
 
     public MutableLiveData<Boolean> mustShowProgress() {
         return mustShowProgress;
+    }
+
+    public MutableLiveData<Boolean> mustShowCenterMessage() {
+        return mustShowCenterMessage;
     }
 
     public SingleLiveEvent<Integer> getCentralMessage() {

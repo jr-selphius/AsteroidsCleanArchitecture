@@ -72,7 +72,9 @@ public class MainActivityFragment extends Fragment {
             }
         });
 
-        mainViewModel.mustShowProgress().observe(this, isVisible -> progress.setVisibility(isVisible ? View.VISIBLE : View.INVISIBLE));
+        mainViewModel.mustShowProgress().observe(this, isVisible -> progress.setVisibility(isVisible ? View.VISIBLE : View.GONE));
+
+        mainViewModel.mustShowCenterMessage().observe(this, isVisible -> centralMessage.setVisibility(isVisible ? View.VISIBLE : View.GONE));
 
         mainViewModel.getCentralMessage().observe(this, integer -> {
             centralMessage.setText(integer);
