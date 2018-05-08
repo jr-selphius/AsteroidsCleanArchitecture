@@ -18,17 +18,17 @@ class AsteroidViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.hazardous)
     TextView hazardous;
 
-    @BindView(R.id.date)
-    TextView date;
-
     public AsteroidViewHolder(View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
     }
 
     public void bind(Asteroide asteroid) {
-        name.setText(asteroid.getName());
-        hazardous.setText(String.valueOf(asteroid.isPotentiallyHazardousAsteroid()));
-        date.setText(asteroid.getDate());
+        name.setText(String.format("%s: %s", itemView.getContext().getString(R.string.asteroid_name), asteroid.getName()));
+        if (asteroid.isPotentiallyHazardousAsteroid()) {
+            hazardous.setText(R.string.asteroid_hazardous);
+        } else {
+            hazardous.setText(R.string.asteroid_no_hazardous);
+        }
     }
 }

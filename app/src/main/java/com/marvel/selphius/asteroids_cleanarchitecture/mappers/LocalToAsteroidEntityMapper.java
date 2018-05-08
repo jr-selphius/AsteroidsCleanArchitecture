@@ -12,13 +12,13 @@ public class LocalToAsteroidEntityMapper extends Mapper<Asteroid, AsteroidEntity
         asteroid.setUid(value.getUid());
         asteroid.setAbstoluteMagnitudeH(asteroid.getAbstoluteMagnitudeH());
         asteroid.setDate(value.getDate());
+        asteroid.setName(value.getName());
 
         return asteroid;
     }
 
     @Override
     public Asteroid reverseMap(AsteroidEntity value) {
-
         return null;
     }
 }
